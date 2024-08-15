@@ -16,5 +16,5 @@ model Video {
   duration     Int
   thumbnailUrl String?
   createdAt    DateTime
-  updatev      DateTime
+  updatedAt    DateTime
 }
