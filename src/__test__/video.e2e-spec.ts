@@ -1,11 +1,11 @@
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '@src/app.module';
-import { PrismaService } from '@src/prisma.service';
+import { PrismaService } from '@src/persistence/prisma.service';
 import request from 'supertest';
 import fs from 'fs';
 
-describe('VideoController (e2e)', () => {
+describe('ContentController (e2e)', () => {
   let module: TestingModule;
   let app: INestApplication;
   let prismaService: PrismaService;
