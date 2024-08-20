@@ -53,7 +53,7 @@ export class VideoEntity extends BaseEntity {
     return MAX_THUMBNAIL_SIZE;
   }
 
-  public serialize(): Record<string, unknown> {
+  public serialize() {
     return {
       id: this.id,
       url: this.url,
