@@ -33,7 +33,7 @@ describe('MediaPlayerController (e2e)', () => {
   });
 
   afterEach(async () => {
-    await videoRepository.clear();
+    // await videoRepository.clear();
   });
 
   afterAll(async () => {
@@ -42,7 +42,7 @@ describe('MediaPlayerController (e2e)', () => {
   });
 
   describe('/stream/:videoId', () => {
-    it('streams a video', async () => {
+    it.only('streams a video', async () => {
       const createContent = await contentManagementService.createContent({
         title: 'Test Video',
         description: 'This is a test video',
@@ -53,10 +53,14 @@ describe('MediaPlayerController (e2e)', () => {
       const fileSize = 32140847;
       const range = `bytes=0-${fileSize - 1}`;
 
+      console.log({ videoId: createContent.getMedia()?.getVideo().getId() });
+
       const response = await request(app.getHttpServer())
         .get(`/stream/${createContent.getMedia()?.getVideo().getId()}`)
         .set('Range', range)
         .expect(HttpStatus.PARTIAL_CONTENT);
+
+      console.log({ response });
 
       expect(response.headers['content-range']).toBe(
         `bytes=0-${fileSize - 1}/${fileSize}`,

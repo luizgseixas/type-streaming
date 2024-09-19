@@ -8,6 +8,7 @@ export class MediaPlayerService {
 
   public async prepareStreaming(videoId: string): Promise<string> {
     const video = await this.videoRepository.findById(videoId);
+    console.log({ video, url: video?.getUrl() });
     if (!video) {
       throw new VideoNotFoundException(`video with id ${videoId} not found`);
     }

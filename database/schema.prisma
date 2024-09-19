@@ -51,9 +51,9 @@ model Thumbnail {
   updatedAt DateTime  @default(now()) @db.Timestamp(6)
   deletedAt DateTime? @db.Timestamp(6)
   url       String    @db.VarChar
+  Episode   Episode?
   Movie     Movie?
   TvShow    TvShow?
-  Episode   Episode?
 }
 
 model TvShow {
@@ -63,9 +63,9 @@ model TvShow {
   deletedAt   DateTime?  @db.Timestamp(6)
   contentId   String?    @unique(map: "UQ_b6ac53aff4b7200e4b01ca43a9c") @db.Uuid
   thumbnailId String?    @unique(map: "UQ_e4e17f7e4fbf10e4bcd61aa8e59") @db.Uuid
+  Episode     Episode[]
   Content     Content?   @relation(fields: [contentId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_b6ac53aff4b7200e4b01ca43a9c")
   Thumbnail   Thumbnail? @relation(fields: [thumbnailId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_e4e17f7e4fbf10e4bcd61aa8e59")
-  Episode     Episode[]
 }
 
 model Episode {
@@ -79,9 +79,9 @@ model Episode {
   number      Int
   tvShowId    String?    @db.Uuid
   thumbnailId String?    @unique(map: "UQ_6c57a6d8be1b8001ee31093ee99") @db.Uuid
-  Video       Video?
   Thumbnail   Thumbnail? @relation(fields: [thumbnailId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_6c57a6d8be1b8001ee31093ee99")
   TvShow      TvShow?    @relation(fields: [tvShowId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_bc417590af57a49dc42ce4ba038")
+  Video       Video?
 }
 
 enum Content_type_enum {
