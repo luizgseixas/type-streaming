@@ -33,7 +33,7 @@ describe('MediaPlayerController (e2e)', () => {
   });
 
   afterEach(async () => {
-    // await videoRepository.clear();
+    await videoRepository.deleteAll();
   });
 
   afterAll(async () => {
