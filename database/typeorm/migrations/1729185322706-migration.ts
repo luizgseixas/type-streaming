@@ -1,14 +1,14 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class Migration1726855294634 implements MigrationInterface {
-  name = 'Migration1726855294634';
+export class Migration1729185322706 implements MigrationInterface {
+  name = 'Migration1729185322706';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
       `CREATE TABLE "Thumbnail" ("id" uuid NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "deletedAt" TIMESTAMP, "url" character varying NOT NULL, CONSTRAINT "PK_29cfea45a44edc72c599d42037f" PRIMARY KEY ("id"))`,
     );
     await queryRunner.query(
-      `CREATE TABLE "Movie" ("id" uuid NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "deletedAt" TIMESTAMP, "contentId" uuid, "thumbnailId" uuid, CONSTRAINT "REL_c155b5944bdd1e260a4ae79bc8" UNIQUE ("contentId"), CONSTRAINT "REL_a20dc7d8915f1caf6079301b10" UNIQUE ("thumbnailId"), CONSTRAINT "PK_56d58b76292b87125c5ec8bdde0" PRIMARY KEY ("id"))`,
+      `CREATE TABLE "Movie" ("id" uuid NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "deletedAt" TIMESTAMP, "externalRating" double precision, "contentId" uuid, "thumbnailId" uuid, CONSTRAINT "REL_c155b5944bdd1e260a4ae79bc8" UNIQUE ("contentId"), CONSTRAINT "REL_a20dc7d8915f1caf6079301b10" UNIQUE ("thumbnailId"), CONSTRAINT "PK_56d58b76292b87125c5ec8bdde0" PRIMARY KEY ("id"))`,
     );
     await queryRunner.query(
       `CREATE TABLE "Video" ("id" uuid NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "deletedAt" TIMESTAMP, "url" character varying NOT NULL, "sizeInKb" integer NOT NULL, "duration" integer NOT NULL, "movieId" uuid, "episodeId" uuid, CONSTRAINT "REL_46efd1060cb7a7c545b06120d1" UNIQUE ("movieId"), CONSTRAINT "REL_ce049b6bf5d3e5aee0f3dbd8dc" UNIQUE ("episodeId"), CONSTRAINT "PK_2a23c3da7a2fc570b1696191b87" PRIMARY KEY ("id"))`,
